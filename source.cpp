@@ -35,6 +35,20 @@ float getRandomFloat( PRNG& generator, float minValue, float maxValue)
 	return distribution( generator.engine );
 }
 
+void frequencyBitTest( bool * bits, const int len )
+{
+	double Sn = 0;
+	for ( int i = 0; i < len; i++ )
+	{
+	
+		if( int(bits[i]) == 1 ) Sn += ( 1 / sqrt( len ) );
+		else Sn -= ( 1 / sqrt( len ) );
+
+	}
+	double Pvalue = erfc( Sn / sqrt( 2 ) );
+	cout << endl << Pvalue;
+}
+
 int main()
 {
 	bool* bits = new bool[128];
@@ -47,7 +61,5 @@ int main()
 		cout << bits[i - 1];
 	}
 	frequencyBitTest( bits, len );
-	sameBitsTest( bits, len );
-	longestOne( bits, len );
 	return 0;
 }
