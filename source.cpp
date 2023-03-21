@@ -63,6 +63,43 @@ void frequencyBitTest( bool * bits, const int len )
 	cout << endl << Pvalue;
 }
 
+void longestOne( bool* bits, const int len )
+{
+
+	int v1 = 0, v2 = 0, v3 = 0, v4 = 0;
+	for ( int i = 0; i < 128/8; i++ )
+	{
+		int cur_long = 0, total_long = 0;
+		for ( int j = 0; j < 8; j++ )
+		{
+			if ( bits[j] == 0 )
+			{
+				if ( cur_long > total_long ) total_long = cur_long;
+				cur_long = 0; 
+			}
+			if ( bits[j] == 1 ) cur_long += 1;
+
+		}
+		if ( total_long <= 1 ) v1++;
+		else if ( total_long == 2 ) v2++;
+		else if ( total_long == 3 ) v3++;
+		else v4++;
+	}
+	double pi[4];
+	pi[0] = 0.2148; pi[1] = 0.3672; pi[2] = 0.2305; pi[3] = 0.1875;
+	double Xi_2 = 0;
+	for( int i = 0; i < 3; i++ )
+	{
+		if( i == 0 ) Xi_2 += ( v1 - 16 * pi[i] ) * ( v1 - 16 * pi[i] ) / 16 * pi[i];
+		if( i == 1 ) Xi_2 += ( v2 - 16 * pi[i] ) * ( v2 - 16 * pi[i] ) / 16 * pi[i];
+		if( i == 2 ) Xi_2 += ( v3 - 16 * pi[i] ) * ( v3 - 16 * pi[i] ) / 16 * pi[i];
+		if( i == 3 ) Xi_2 += ( v4 - 16 * pi[i] ) * ( v4 - 16 * pi[i] ) / 16 * pi[i];
+
+	}
+	cout << endl << Xi_2;
+	//double Pvalue = igamc(3 / 2, Xi_2 / 2);
+}
+
 int main()
 {
 	bool* bits = new bool[128];
@@ -76,5 +113,6 @@ int main()
 	}
 	frequencyBitTest( bits, len );
     sameBitsTest( bits, len );
+    longestOne( bits, len );
 	return 0;
 }
