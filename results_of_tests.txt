@@ -1,0 +1,6 @@
+frequency bitwise test: 1) Pvalue = 1.62324
+2) Pvalue = 1
+test for identical consecutive bits: 1) Pvalue = 0.412311
+2) Pvalue = 0.4795
+test for the longest sequence of units in a block: 1) Pvalue = 0.49716276
+2) Pvalue = 0.20754182
