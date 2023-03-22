@@ -14,7 +14,7 @@ struct PRNG
 
 void initGenerator( PRNG& generator )
 {
-	 
+
 	random_device device;
 	generator.engine.seed( device() );
 
